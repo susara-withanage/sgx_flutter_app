@@ -2,13 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:namer_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var authProvider = context.watch<AuthProvider>();
-
     String username = '';
     String password = '';
+
+    Widget errors = Text("");
+
+    if (authProvider.onError) {
+      errors = Text(
+        authProvider.error,
+        style: TextStyle(color: Color.fromRGBO(255, 0, 0, 1)),
+      );
+    }
 
     return Center(
       child: Padding(
@@ -34,6 +47,7 @@ class LoginPage extends StatelessWidget {
                 hintText: 'Password',
               ),
             ),
+            errors,
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
