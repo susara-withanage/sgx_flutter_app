@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namer_app/providers/auth_provider.dart';
+import 'package:namer_app/screens/home_page.dart';
 import 'package:namer_app/screens/login_page.dart';
 import 'package:provider/provider.dart';
 
@@ -34,15 +35,12 @@ class SGXApp extends StatelessWidget {
 
     Widget page;
     if (isAuthenticated) {
-      page = const Placeholder();
+      page = MyHomePage();
     } else {
       page = LoginPage();
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('SGX App'),
-      ),
       body: page,
     );
   }
